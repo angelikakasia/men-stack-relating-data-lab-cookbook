@@ -5,9 +5,10 @@
 
   <h1>Edit Food</h1>
 
-  <form action="/users/<%= user._id %>/foods/<%= item._id %>?_method=PUT" method="POST">
+  <form action="/users/<%= user._id %>/foods/<%= food._id %>?_method=PUT" method="POST">
     <label>Name:</label>
-    <input name="name" value="<%= item.name %>" />
+    <input type="text" name="name" value="<%= food.name %>" required />
+
     <button>Save</button>
   </form>
 </body>

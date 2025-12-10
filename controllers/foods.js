@@ -48,14 +48,16 @@ router.delete("/:itemId", async (req, res) => {
 // EDIT — show form
 router.get("/:itemId/edit", async (req, res) => {
   try {
-    const user = await User.findById(req.params.userId);
+    const user = await User.findById(req.session.user._id);
     const food = user.pantry.id(req.params.itemId);
+
     res.render("foods/edit.ejs", { food, user });
   } catch (error) {
     console.log(error);
     res.redirect("/");
   }
 });
+
 
 // UPDATE
 router.put("/:itemId", async (req, res) => {
