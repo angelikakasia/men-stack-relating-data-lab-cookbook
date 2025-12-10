@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 
+const foodSchema = new mongoose.Schema({
+  name: String
+});
+
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  foods: [
-    {
-      name: String,
-      calories: Number
-    }
-  ]
+  username: String,
+  password: String,
+  pantry: [foodSchema]   
 });
 
 module.exports = mongoose.model("User", userSchema);
