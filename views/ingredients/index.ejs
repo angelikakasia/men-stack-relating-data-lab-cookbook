@@ -1,0 +1,14 @@
+<%- include('../partials/_navbar.ejs') %>
+
+<h1>Ingredients</h1>
+
+<form method="POST" action="/ingredients">
+  <input type="text" name="name" placeholder="Ingredient Name" required />
+  <button>Add Ingredient</button>
+</form>
+
+<ul>
+  <% ingredients.forEach(i => { %>
+    <li><%= i.name %></li>
+  <% }) %>
+</ul>
