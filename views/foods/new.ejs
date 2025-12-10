@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Add Food</title>
-</head>
-<body>
-  <%- include('../partials/_navbar.ejs') %>
+<%- include("../partials/_navbar.ejs") %>
 
-  <h1>Add New Food</h1>
+<h1>Add a New Pantry Item</h1>
 
-  <form method="POST" action="/users/<%= user._id %>/foods">
-    <input type="text" name="name" placeholder="Food name" required />
-    <button>Add</button>
-  </form>
-
-</body>
-</html>
+<form action="/users/<%= user._id %>/foods" method="POST">
+  <label>Name:</label>
+  <input type="text" name="name" required />
+  <button>Add</button>
+</form>

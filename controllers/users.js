@@ -1,28 +1,17 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const User = require('../models/user.js');
-const Recipe = require('../models/recipe.js');
+const User = require("../models/user");
 
-// COMMUNITY PAGE — list all users
-router.get('/', async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.render('users/index.ejs', { users });
-  } catch (err) {
-    console.log(err);
-    res.redirect('/');
-  }
+// COMMUNITY PAGE
+router.get("/", async (req, res) => {
+  const users = await User.find();
+  res.render("users/index.ejs", { users });
 });
 
-// SHOW PAGE — view another user's recipes
-router.get('/:userId', async (req, res) => {
-  try {
-    const user = await User.findById(req.params.userId).populate('recipes');
-    res.render('users/show.ejs', { profileUser: user });
-  } catch (err) {
-    console.log(err);
-    res.redirect('/');
-  }
+// SHOW USER PANTRY
+router.get("/:id", async (req, res) => {
+  const user = await User.findById(req.params.id);
+  res.render("users/show.ejs", { user });
 });
 
 module.exports = router;
