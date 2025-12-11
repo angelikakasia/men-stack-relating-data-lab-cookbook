@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html>
 <body>
-  <%- include("../partials/_navbar.ejs") %>
+  <body>
+  <%- include('../partials/_navbar.ejs') %>
 
-  <h1>My Pantry</h1>
+  <h1>Welcome to my Pantry</h1>
 
-  <!-- Add new pantry item -->
   <a href="/users/<%= user._id %>/foods/new">Add New Item</a>
 
-  <% if (pantry.length === 0) { %>
-    <p>No items in your pantry.</p>
-  <% } else { %>
+  <% if (pantry.length > 0) { %>
     <ul>
       <% pantry.forEach(item => { %>
         <li>
           <%= item.name %>
+          <!--edit-->
+            <a href="/users/<%= user._id %>/foods/<%= item._id %>/edit">Edit</a>
 
-          <!-- Edit item -->
-          <a href="/users/<%= user._id %>/foods/<%= item._id %>/edit">Edit</a>
-
-          <!-- Delete item -->
-          <form 
-            action="/users/<%= user._id %>/foods/<%= item._id %>?_method=DELETE" 
-            method="POST" 
-            style="display:inline;"
-          >
-            <button>Delete</button>
+          <!-- DELETE BUTTON -->
+          <form action="/users/<%= user._id %>/foods/<%= item._id %>?_method=DELETE" method="POST" style="display:inline">
+            <button type="submit">Delete</button>
           </form>
+
         </li>
       <% }) %>
     </ul>
+  <% } else { %>
+    <p>There are no items in this pantry.</p>
   <% } %>
+
 </body>
+
 </html>
