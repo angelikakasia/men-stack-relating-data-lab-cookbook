@@ -6,6 +6,7 @@ const User = require("../models/user.js");
 // INDEX ROUTE - show all pantry items
 router.get('/', async (req, res) => {
   try {
+    console.log("this is our console log in foods.js")
     const user = await User.findById(req.session.user._id);
 
     res.render('foods/index.ejs', {

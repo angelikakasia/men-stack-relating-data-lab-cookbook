@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 const methodOverride = require("method-override");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const mongoose = require("mongoose");
 
 const authController = require("./controllers/auth.js"); // .
 const foodsController = require("./controllers/foods.js"); //*
@@ -14,6 +14,10 @@ const usersController = require("./controllers/users.js");// .
 const isSignedIn = require("./middleware/is-signed-in.js"); // .
 const passUserToView = require("./middleware/pass-user-to-view.js");//.
 
+mongoose.connect(process.env.MONGODB_URI)
+mongoose.connection.on('connected', () => {
+    console.log(`Connected to MongoDB ${mongoose.connection.name}.`)
+})
 // MIDDLEWARE
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
@@ -23,11 +27,9 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: process.env.MONGODB_URI,
-    }),
-  })
-);
+    
+    }));
+
 
 app.use(passUserToView);
 

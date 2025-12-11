@@ -4,9 +4,9 @@ const User = require('../models/user.js');
 
 // INDEX ROUTE - show all users
 // SHOW ROUTE - view another user's pantry
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.find();
     res.render('users/show.ejs', { user: user });
   } catch (err) {
     console.log(err);
